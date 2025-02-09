@@ -3,32 +3,33 @@ import axiosClient from "../axios-client.js";
 import {Link} from "react-router-dom";
 import {useStateContext} from "../context/ContextProvider.jsx";
 
-export default function Users() {
-  const [users, setUsers] = useState([]);
+export default function Leagues() {
+  const [leagues, setLeagues] = useState([]);
   const [loading, setLoading] = useState(false);
   const {setNotification} = useStateContext()
 
   useEffect(() => {
-    getUsers();
+    getLeagues();
   }, [])
 
-  const onDeleteClick = user => {
-    if (!window.confirm("Are you sure you want to delete this user?")) {
+  const onDeleteClick = league => {
+    if (!window.confirm("Are you sure you want to delete this league?")) {
       return
     }
-    axiosClient.delete(`/users/${user.id}`)
+    axiosClient.delete(`/leagues/${league.id}`)
       .then(() => {
-        setNotification('User was successfully deleted')
-        getUsers()
+        setNotification('League was successfully deleted')
+        getLeagues()
       })
   }
 
-  const getUsers = () => {
+  const getLeagues = () => {
     setLoading(true)
-    axiosClient.get('/users')
+    axiosClient.get('/leagues')
       .then(({ data }) => {
+        console.log('ello fetch data');
         setLoading(false)
-        setUsers(data.data)
+        setLeagues(data.data)
       })
       .catch(() => {
         setLoading(false)
@@ -38,18 +39,15 @@ export default function Users() {
   return (
     <div>
       <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center"}}>
-        <h1>Users</h1>
-        <Link className="btn-add" to="/users/new">Add new</Link>
+        <h1>Leagues</h1>
+        <Link className="btn-add" to="/leagues/new">Create League</Link>
       </div>
       <div className="card animated fadeInDown">
         <table>
           <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Create Date</th>
-            <th>Actions</th>
+            <th>Code</th>
           </tr>
           </thead>
           {loading &&
@@ -63,15 +61,11 @@ export default function Users() {
           }
           {!loading &&
             <tbody>
-            {users.map(u => (
+            {leagues.map(league => (
               <tr key={u.id}>
-                <td>{u.id}</td>
-                <td>{u.name}</td>
-                <td>{u.email}</td>
-                <td>{u.created_at}</td>
+                <td>{league.name}</td>
+                <td>{league.code}</td>
                 <td>
-                  <Link className="btn-edit" to={'/users/' + u.id}>Edit</Link>
-                  &nbsp;
                   <button className="btn-delete" onClick={ev => onDeleteClick(u)}>Delete</button>
                 </td>
               </tr>

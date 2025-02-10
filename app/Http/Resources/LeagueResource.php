@@ -20,6 +20,7 @@ class LeagueResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'code' => $this->code,
+            'created_by_user_id' => $request->user()->id,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

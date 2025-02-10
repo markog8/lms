@@ -48,6 +48,7 @@ export default function Leagues() {
           <tr>
             <th>Name</th>
             <th>Code</th>
+            <th>Actions</th>
           </tr>
           </thead>
           {loading &&
@@ -62,7 +63,7 @@ export default function Leagues() {
           {!loading &&
             <tbody>
             {leagues.map(league => (
-              <tr key={u.id}>
+              <tr key={league.id}>
                 <td>{league.name}</td>
                 <td>{league.code}</td>
                 <td>

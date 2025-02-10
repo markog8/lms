@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LeagueResource;
+use App\Http\Requests\StoreLeagueRequest;
 use App\Models\League;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LeagueController extends Controller
 {
@@ -25,15 +27,14 @@ class LeagueController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLeagueRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-        ]);
+        $data = $request->validated();
+        $data['code'] = Str::uuid();
+        $data['created_by_user_id'] = $request->user()->id;
 
-        $league = League::create($request->all());
-        return response()->json($league, 201);
+        $league = League::create($data);
+        return response(new LeagueResource($league), 201);
     }
 
     /**

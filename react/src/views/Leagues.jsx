@@ -27,7 +27,6 @@ export default function Leagues() {
     setLoading(true)
     axiosClient.get('/leagues')
       .then(({ data }) => {
-        console.log('ello fetch data');
         setLoading(false)
         setLeagues(data.data)
       })
@@ -67,7 +66,7 @@ export default function Leagues() {
                 <td>{league.name}</td>
                 <td>{league.code}</td>
                 <td>
-                  <button className="btn-delete" onClick={ev => onDeleteClick(u)}>Delete</button>
+                  <button className="btn-delete" onClick={ev => onDeleteClick(league)}>Delete</button>
                 </td>
               </tr>
             ))}

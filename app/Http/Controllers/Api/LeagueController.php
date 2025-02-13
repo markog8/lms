@@ -38,35 +38,6 @@ class LeagueController extends Controller
     }
 
     /**
-     * Display the specified league.
-     *
-     * @param  \App\Models\League  $league
-     * @return \Illuminate\Http\Response
-     */
-    public function show(League $league)
-    {
-        return response()->json($league);
-    }
-
-    /**
-     * Update the specified league in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\League  $league
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, League $league)
-    {
-        $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'country' => 'sometimes|required|string|max:255',
-        ]);
-
-        $league->update($request->all());
-        return response()->json($league);
-    }
-
-    /**
      * Remove the specified league from storage.
      *
      * @param  \App\Models\League  $league

@@ -48,4 +48,18 @@ class LeagueController extends Controller
         $league->delete();
         return response()->json(null, 204);
     }
+
+    /**
+     * Add a user to the specified league.
+     *
+     * @param  \App\Models\League  $league
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addUser($leagueId, Request $request)
+    {
+        $request->user()->leagues()->syncWithoutDetaching($leagueId);
+
+        return response()->json(null, 204);
+    }
 }

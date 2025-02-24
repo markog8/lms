@@ -6,7 +6,8 @@ import {useStateContext} from "../context/ContextProvider.jsx";
 export default function Leagues() {
   const [leagues, setLeagues] = useState([]);
   const [loading, setLoading] = useState(false);
-  const {setNotification} = useStateContext()
+  const {user, setNotification} = useStateContext();
+  console.log(user);
 
   useEffect(() => {
     getLeagues();
@@ -20,6 +21,13 @@ export default function Leagues() {
       .then(() => {
         setNotification('League was successfully deleted')
         getLeagues()
+      })
+  }
+
+  const onJoinClick = league => {
+    axiosClient.post(`/leagues/${league.id}/join`)
+      .then(() => {
+        setNotification('Successfully joined league ' + league.name)
       })
   }
 
@@ -66,7 +74,9 @@ export default function Leagues() {
                 <td>{league.name}</td>
                 <td>{league.code}</td>
                 <td>
-                  <button className="btn-delete" onClick={ev => onDeleteClick(league)}>Delete</button>
+                <button className="btn-add" onClick={ev => onJoinClick(league)}>Join</button>
+                &nbsp;
+                <button className="btn-delete" onClick={ev => onDeleteClick(league)}>Delete</button>
                 </td>
               </tr>
             ))}

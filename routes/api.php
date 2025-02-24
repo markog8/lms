@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('/users', UserController::class);
     Route::apiResource('/leagues', LeagueController::class);
+    Route::post('/leagues/{league}/join', [LeagueController::class, 'addUser']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);

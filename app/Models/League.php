@@ -33,6 +33,7 @@ class League extends Authenticatable
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_league');
+        return $this->belongsToMany(User::class, 'user_league')
+            ->withTimestamps();
     }
 }

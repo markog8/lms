@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,10 +29,4 @@ class League extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [];
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'user_league')
-            ->withTimestamps();
-    }
 }

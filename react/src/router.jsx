@@ -9,6 +9,7 @@ import Users from "./views/Users";
 import UserForm from "./views/UserForm";
 import Leagues from "./views/Leagues.jsx";
 import LeagueForm from "./views/LeagueForm.jsx";
+import LeagueDetail from "./views/LeagueDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,12 @@ const router = createBrowserRouter([
       {
         path: '/leagues/new',
         element: <LeagueForm/>
+      },
+      {
+        path: '/leagues/:id',
+        element: <LeagueDetail/>
       }
+
     ]
   },
   {

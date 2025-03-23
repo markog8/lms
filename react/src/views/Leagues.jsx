@@ -7,7 +7,7 @@ export default function Leagues() {
   const [leagues, setLeagues] = useState([]);
   const [userLeagues, setUserLeagues] = useState([]);
   const [loading, setLoading] = useState(false);
-  const {user, setNotification} = useStateContext();
+  const {setNotification} = useStateContext();
 
   useEffect(() => {
     getLeagues();
@@ -50,7 +50,6 @@ export default function Leagues() {
       .then(({ data }) => {
         setLoading(false)
         setLeagues(data.data)
-        console.log(data.data);
       })
       .catch(() => {
         setLoading(false)
@@ -63,7 +62,6 @@ export default function Leagues() {
       .then(({ data }) => {
         setLoading(false)
         setUserLeagues(data.data)
-        console.log(data.data);
       })
       .catch(() => {
         setLoading(false)
@@ -105,7 +103,7 @@ export default function Leagues() {
                     <td>
                       <button className="btn-add" onClick={ev => onJoinClick(league)}>Join</button>
                       &nbsp;
-                      <button className="btn-delete" onClick={ev => onDeleteClick(league)}>Leave</button>
+                      <button className="btn-delete" onClick={ev => onDeleteClick(league)}>Delete</button>
                     </td>
                   </tr>
                 ))
@@ -143,7 +141,7 @@ export default function Leagues() {
                     <td>{league.name}</td>
                     <td>{league.code}</td>
                     <td>
-                    <button className="btn-add">View</button>
+                    <Link className="btn-add" to={`/leagues/${league.id}`}>View</Link>
                       &nbsp;
                       <button className="btn-delete" onClick={ev => onLeaveClick(league)}>Leave</button>
                     </td>

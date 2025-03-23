@@ -32,6 +32,15 @@ class LeagueController extends Controller
         return LeagueResource::collection($leagues);
     }
 
+    public function getLeagueDetails($leagueId)
+    {
+        $league = League::whereId($leagueId)
+            ->with('users')
+            ->first();
+
+        return new LeagueResource($league);
+    }
+
     public function deleteUserLeague($leagueId, Request $request)
     {
         $request->user()->leagues()->detach($leagueId);

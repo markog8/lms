@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/leagues', [LeagueController::class, 'getUserLeagues']);
     Route::delete('/user/leagues/{league}', [LeagueController::class, 'deleteUserLeague']);
     Route::apiResource('/leagues', LeagueController::class);
+    Route::get('/leagues/{league}', [LeagueController::class, 'getLeagueDetails']);
     Route::post('/leagues/{league}/join', [LeagueController::class, 'addUser']);
 });
 

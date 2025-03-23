@@ -1,7 +1,10 @@
-import {createBrowserRouter, Navigate} from "react-router-dom";
-import Dashboard from "./Dashboard.jsx";
+// 1. Third-party libraries
+import { createBrowserRouter, Navigate } from "react-router-dom";
+// 2. Local components
 import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
+// 3. Views & Pages
+import Dashboard from "./Dashboard.jsx";
 import Login from "./views/Login";
 import NotFound from "./views/NotFound";
 import Signup from "./views/Signup";
@@ -9,6 +12,7 @@ import Users from "./views/Users";
 import UserForm from "./views/UserForm";
 import Leagues from "./views/Leagues.jsx";
 import LeagueForm from "./views/LeagueForm.jsx";
+import LeagueDetail from "./views/LeagueDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +47,12 @@ const router = createBrowserRouter([
       {
         path: '/leagues/new',
         element: <LeagueForm/>
+      },
+      {
+        path: '/leagues/:id',
+        element: <LeagueDetail/>
       }
+
     ]
   },
   {

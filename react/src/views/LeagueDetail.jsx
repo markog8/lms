@@ -88,7 +88,6 @@ export default function LeagueDetail() {
             {gameWeeks.map((week) => (
               <th key={week} className="px-6 py-4 border-b">{week}</th>
             ))}
-            {/* Additional weeks - truncated for brevity */}
           </tr>
         </thead>
         <tbody>
